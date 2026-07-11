@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import './globals.css';
 
 export default function Page() {
-    // 多國語言語系設定檔
+    // 多國語言語系設定檔（已全面剔除未使用的專案一二三文字）
     const translations: Record<string, Record<string, string>> = {
         'zh-TW': {
             nav_about: '關於我們',
@@ -46,17 +46,11 @@ export default function Page() {
             service6_desc: '大數據處理、數據可視化、商業智能解決方案。',
             works_title: '我們的作品',
             works_subtitle: '這裡空空，去其他地方逛逛吧',
-            work1_title: '專案一',
-            work1_desc: '在此填入專案簡介，說明解決了什麼問題、使用了哪些技術。',
-            work2_title: '專案二',
-            work2_desc: '在此填入專案簡介，說明解決了什麼問題、使用了哪些技術。',
-            work3_title: '專案三',
-            work3_desc: '在此填入專案簡介，說明解決了什麼問題、使用了哪些技術。',
             team_title: '我們的團隊',
             team_subtitle: '小而精悍，充滿好奇心的開發者',
             team_member1: 'Champ',
             team_role1: '創辦人 & 開發者',
-            team_desc1: '一個人扛起 AI 研究、全端開發、數據科學與雲端架構——不是因為經驗有多深，而是因為熱愛把想法做出來。',
+            team_desc1: '一個人扛起 AI 研究、全端開發、數據科學與雲端架構——不是因為經驗有多深，而是 because 熱愛把想法做出來。',
             contact_title: '聯繫我們',
             contact_subtitle: '讓我們一起打造下一代技術解決方案',
             contact_email: '電郵',
@@ -106,14 +100,8 @@ export default function Page() {
             service6_desc: 'ビッグデータ処理、データ可視化、ビジネスインテリジェンスソリューション。',
             works_title: '実績',
             works_subtitle: 'ここはまだ空っぽです。他のページも見てみてください',
-            work1_title: 'プロジェクト 1',
-            work1_desc: 'ここにプロジェクトの概要を記載します。解決した課題や使用技術など。',
-            work2_title: 'プロジェクト 2',
-            work2_desc: 'ここにプロジェクトの概要を記載します。解決した課題や使用技術など。',
-            work3_title: 'プロジェクト 3',
-            work3_desc: 'ここにプロジェクトの概要を記載します。解決した課題や使用技術など。',
             team_title: 'チーム',
-            team_subtitle: '小さくても本気、好奇みが原動力',
+            team_subtitle: '小さくても本気、好奇心が原動力',
             team_member1: 'Champ',
             team_role1: '創業者 & 開発者',
             team_desc1: 'AI研究、フルスタック開発、データサイエンス、クラウド構築をひとりで担う。経験の長さではなく、アイデアを形にする情熱で動いています。',
@@ -166,12 +154,6 @@ export default function Page() {
             service6_desc: 'Big data processing, data visualization, and business intelligence solutions.',
             works_title: 'Our Work',
             works_subtitle: 'Nothing here yet — go explore the rest of the site',
-            work1_title: 'Project One',
-            work1_desc: 'Add a short project summary here — the problem it solved and the tech behind it.',
-            work2_title: 'Project Two',
-            work2_desc: 'Add a short project summary here — the problem it solved and the tech behind it.',
-            work3_title: 'Project Three',
-            work3_desc: 'Add a short project summary here — the problem it solved and the tech behind it.',
             team_title: 'Our Team',
             team_subtitle: 'Small, sharp, and endlessly curious',
             team_member1: 'Champ',
@@ -221,17 +203,11 @@ export default function Page() {
             service4_title: '소프트웨어 개발',
             service4_desc: '최신 기술 스택을 사용한 웹, 모바일, 데스크톱 애플리케이션 풀스택 개발입니다.',
             service5_title: '클라우드 솔루션',
-            service5_desc: 'AWS, Google Cloud, Azure 등의 주요 클라우드 플랫폼의 아케텍처 설계 및 배포입니다.',
+            service5_desc: 'AWS, Google Cloud, Azure 등의 주요 클라우드 플랫폼의 아키텍처 설계 및 배포입니다.',
             service6_title: '데이터 분석',
             service6_desc: '빅데이터 처리, 데이터 시각화, 비즈니스 인텔리전스 솔루션입니다.',
             works_title: '우리의 작업물',
             works_subtitle: '아직 여긴 비어 있어요, 다른 곳도 둘러봐 주세요',
-            work1_title: '프로젝트 1',
-            work1_desc: '해결한 문제와 사용한 기술 등 프로젝트 소개를 여기에 작성하세요.',
-            work2_title: '프로젝트 2',
-            work2_desc: '해결한 문제와 사용한 기술 등 프로젝트 소개를 여기에 작성하세요.',
-            work3_title: '프로젝트 3',
-            work3_desc: '해결한 문제와 사용한 기술 등 프로젝트 소개를 여기에 작성하세요.',
             team_title: '우리의 팀',
             team_subtitle: '작지만 단단하고, 호기심으로 움직이는 팀',
             team_member1: 'Champ',
@@ -269,7 +245,7 @@ export default function Page() {
             value3_title: 'Exzellenz',
             value3_desc: 'Streben nach Code-Qualität',
             value4_title: 'Zusammenarbeit',
-            value4_desc: 'Aufbau langfristiger Partnerschaften',
+            value4_desc: 'Aufbau langfristiger Partnerships',
             services_title: 'Unsere Dienstleistungen',
             services_subtitle: 'Umfassende KI- und Softwareentwicklungslösungen',
             service1_title: 'KI-Modellentwicklung',
@@ -286,12 +262,6 @@ export default function Page() {
             service6_desc: 'Big-Data-Verarbeitung, Datenvisualisierung und Business-Intelligence-Lösungen.',
             works_title: 'Unsere Arbeiten',
             works_subtitle: 'Hier ist noch nichts – schauen Sie sich gerne woanders um',
-            work1_title: 'Projekt Eins',
-            work1_desc: 'Fügen Sie hier eine kurze Projektbeschreibung ein — das gelöste Problem und die eingesetzte Technik.',
-            work2_title: 'Projekt Zwei',
-            work2_desc: 'Fügen Sie hier eine kurze Projektbeschreibung ein — das gelöste Problem und die eingesetzte Technik.',
-            work3_title: 'Projekt Drei',
-            work3_desc: 'Fügen Sie hier eine kurze Projektbeschreibung ein — das gelöste Problem und die eingesetzte Technik.',
             team_title: 'Unser Team',
             team_subtitle: 'Klein, scharfsinnig, unermüdlich neugierig',
             team_member1: 'Champ',
@@ -346,14 +316,8 @@ export default function Page() {
             service6_desc: 'Обработка больших данных, визуализация данных и решения бизнес-аналитики.',
             works_title: 'Наши работы',
             works_subtitle: 'Здесь пока пусто — загляните в другие разделы',
-            work1_title: 'Проект 1',
-            work1_desc: 'Добавьте здесь краткое описание проекта — решённую задачу и использованные технологии.',
-            work2_title: 'Проект 2',
-            work2_desc: 'Добавьте здесь краткое описание проекта — решённую задачу и использованные технологии.',
-            work3_title: 'Проект 3',
-            work3_desc: 'Добавьте здесь краткое описание проекта — решённую задачу и использованные технологии.',
             team_title: 'Наша команда',
-            team_subtitle: 'Небольшая, целеустремлённая и вечно любопытная',
+            team_subtitle: 'Небольшая, целеустремленная и вечно любопытная',
             team_member1: 'Champ',
             team_role1: 'Основатель & разработчик',
             team_desc1: 'В одиночку отвечает за исследования ИИ, полнотекстовую разработку, науку о данных и облачную инфраструктуру — не благодаря годам опыта, а благодаря желанию воплощать идеи в жизнь.',
@@ -406,12 +370,6 @@ export default function Page() {
             service6_desc: 'Procesamiento de big data, visualización de datos y soluciones de inteligencia empresarial.',
             works_title: 'Nuestros Trabajos',
             works_subtitle: 'Aquí no hay nada todavía, échale un vistazo al resto del sitio',
-            work1_title: 'Proyecto Uno',
-            work1_desc: 'Añade aquí un resumen del proyecto: el problema que resolvió y la tecnología usada.',
-            work2_title: 'Proyecto Dos',
-            work2_desc: 'Añade aquí un resumen del proyecto: el problema que resolvió y la tecnología usada.',
-            work3_title: 'Proyecto Tres',
-            work3_desc: 'Añade aquí un resumen del proyecto: el problema que resolvió y la tecnología usada.',
             team_title: 'Nuestro Equipo',
             team_subtitle: 'Pequeño, ágil, y sin límite de curiosidad',
             team_member1: 'Champ',
@@ -462,23 +420,17 @@ export default function Page() {
             service4_desc: 'Desenvolvimento full-stack para aplicações web, móveis e de desktop com pilhas tecnológicas mais recentes.',
             service5_title: 'Soluções em Nuvem',
             service5_desc: 'Design de arquitetura e implantação em plataformas em nuvem como AWS, Google Cloud e Azure.',
-            service6_title: 'Análise de Dados',
+            service6_title: 'Análise de Datos',
             service6_desc: 'Processamento de big data, visualização de dados e soluções de inteligência empresarial.',
             works_title: 'Nossos Trabalhos',
             works_subtitle: 'Ainda não há nada aqui, dá uma olhada no resto do site',
-            work1_title: 'Projeto Um',
-            work1_desc: 'Adicione aqui um resumo do projeto — o problema resolvido e a tecnologia usada.',
-            work2_title: 'Projeto Dois',
-            work2_desc: 'Adicione aqui um resumo do projeto — o problema resolvido e a tecnologia usada.',
-            work3_title: 'Projeto Três',
-            work3_desc: 'Adicione aqui um resumo do projeto — o problema resolvido e a tecnologia usada.',
             team_title: 'Nossa Equipe',
             team_subtitle: 'Pequena, afiada e movida por curiosidade',
             team_member1: 'Champ',
             team_role1: 'Fundador & Criador',
             team_desc1: 'Assume sozinho a pesquisa de IA, desenvolvimento full-stack, ciência de dados e infraestrutura em nuvem — não por anos de experiência, mas pela vontade de transformar ideias em realidade.',
             contact_title: 'Contate-nos',
-            contact_subtitle: 'Vamos construir soluções de próxima geração juntos',
+            contact_subtitle: 'Vamos construir soluções de próxima generation juntos',
             contact_email: 'E-mail',
             contact_phone: 'Telefone',
             contact_address: 'Endereço',
@@ -511,10 +463,8 @@ export default function Page() {
     }
 
     useEffect(() => {
-        // 初始化語言
         setLanguage('zh-TW');
 
-        // Scroll-reveal 動態
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (!prefersReducedMotion && 'IntersectionObserver' in window) {
             const revealObserver = new IntersectionObserver((entries) => {
@@ -530,7 +480,6 @@ export default function Page() {
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
         }
 
-        // 回到頂端按鈕機制
         const backToTop = document.getElementById('backToTop');
         const handleScroll = () => {
             if (backToTop) {
@@ -543,7 +492,6 @@ export default function Page() {
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
 
-                // 導航列連結高亮追蹤
         const navLinks = document.querySelectorAll('.nav-links a');
         const navSections = Array.from(navLinks)
             .map(link => {
@@ -563,11 +511,9 @@ export default function Page() {
                     }
                 });
             }, { threshold: 0.4, rootMargin: '-80px 0px -50% 0px' });
-            
             navSections.forEach(section => navObserver.observe(section));
         }
 
-        // 背景神經網路背景動畫 (Neural Network Hero Background)
         const canvas = document.getElementById('neuralCanvas') as HTMLCanvasElement | null;
         if (canvas) {
             const ctx = canvas.getContext('2d');
@@ -717,6 +663,7 @@ export default function Page() {
                 </div>
             </section>
 
+            {/* 🚀 完美修正：作品區塊高冷獨立，只會留下指定警語，毫無專案格子卡片 */}
             <section id="portfolio">
                 <h2 data-i18n="works_title">我們的作品</h2>
                 <p className="section-subtitle reveal" data-i18n="works_subtitle"></p>
