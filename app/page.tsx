@@ -693,7 +693,7 @@ export default function Page() {
                     <div className="contact-item reveal">
                         <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}></div>
                         <h3 style={{ color: 'white', fontSize: '1rem', marginBottom: '0.5rem' }} data-i18n="contact_phone"></h3>
-                        <p><a href="tel:+886123456789" style={{ color: 'var(--primary-color)', textDecoration: 'none' }}>尚未註冊</a></p>
+                        <p><a href="javascript:void(0)" style={{ color: 'var(--primary-color)', textDecoration: 'none' }}>尚未註冊</a></p>
                     </div>
                     <div className="contact-item reveal">
                         <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}></div>
