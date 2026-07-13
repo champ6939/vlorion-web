@@ -21,6 +21,7 @@ import './globals.css';
 
 export default function Page() {
     const [emailCopied, setEmailCopied] = useState(false);
+    const [langMenuOpen, setLangMenuOpen] = useState(false);
 
     // 多國語言語系設定檔
     const translations: Record<string, Record<string, string>> = {
@@ -700,6 +701,19 @@ export default function Page() {
         });
     };
 
+    // Close the mobile language dropdown when tapping/clicking outside of it
+    useEffect(() => {
+        if (!langMenuOpen) return;
+        const handleClickOutside = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            if (!target.closest('.language-selector')) {
+                setLangMenuOpen(false);
+            }
+        };
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, [langMenuOpen]);
+
     return (
         <>
             {/* ── Header / Nav ─────────────────────────────────────── */}
@@ -708,14 +722,29 @@ export default function Page() {
                     <div className="nav-top">
                         <div className="logo" data-i18n="hero_title">VLORION</div>
                         <div className="language-selector">
-                            <button className="lang-btn active" data-lang="zh-TW" onClick={() => setLanguage('zh-TW')}>繁中</button>
-                            <button className="lang-btn" data-lang="en" onClick={() => setLanguage('en')}>EN</button>
-                            <button className="lang-btn" data-lang="ja" onClick={() => setLanguage('ja')}>日本</button>
-                            <button className="lang-btn" data-lang="ko" onClick={() => setLanguage('ko')}>한국</button>
-                            <button className="lang-btn" data-lang="de" onClick={() => setLanguage('de')}>DE</button>
-                            <button className="lang-btn" data-lang="ru" onClick={() => setLanguage('ru')}>RU</button>
-                            <button className="lang-btn" data-lang="es" onClick={() => setLanguage('es')}>ES</button>
-                            <button className="lang-btn" data-lang="pt" onClick={() => setLanguage('pt')}>PT</button>
+                            <button
+                                type="button"
+                                className="lang-toggle"
+                                aria-label="Select language"
+                                aria-expanded={langMenuOpen}
+                                onClick={() => setLangMenuOpen(o => !o)}
+                            >
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                            </button>
+                            <div className={`lang-list${langMenuOpen ? ' open' : ''}`}>
+                                <button className="lang-btn active" data-lang="zh-TW" onClick={() => { setLanguage('zh-TW'); setLangMenuOpen(false); }}>繁中</button>
+                                <button className="lang-btn" data-lang="en" onClick={() => { setLanguage('en'); setLangMenuOpen(false); }}>EN</button>
+                                <button className="lang-btn" data-lang="ja" onClick={() => { setLanguage('ja'); setLangMenuOpen(false); }}>日本</button>
+                                <button className="lang-btn" data-lang="ko" onClick={() => { setLanguage('ko'); setLangMenuOpen(false); }}>한국</button>
+                                <button className="lang-btn" data-lang="de" onClick={() => { setLanguage('de'); setLangMenuOpen(false); }}>DE</button>
+                                <button className="lang-btn" data-lang="ru" onClick={() => { setLanguage('ru'); setLangMenuOpen(false); }}>RU</button>
+                                <button className="lang-btn" data-lang="es" onClick={() => { setLanguage('es'); setLangMenuOpen(false); }}>ES</button>
+                                <button className="lang-btn" data-lang="pt" onClick={() => { setLanguage('pt'); setLangMenuOpen(false); }}>PT</button>
+                            </div>
                         </div>
                     </div>
                     <ul className="nav-links">
