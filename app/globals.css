@@ -1,3 +1,13 @@
+/**
+ * VLORION — Global Stylesheet
+ * ------------------------------------------------------------------
+ * Dark, neon cyberpunk theme. Sections below are ordered to match
+ * the page structure: reset → base/typography → header/nav → hero
+ * → section headings → about → services → portfolio → team →
+ * contact → footer → back-to-top → responsive.
+ * ------------------------------------------------------------------
+ */
+
 @font-face {
     font-family: 'Orbitron';
     src: url('/Orbitron-VariableFont_wght.ttf') format('truetype');
@@ -109,6 +119,8 @@ body::before {
     z-index: -1;
 }
 
+/* ── Header / Nav ─────────────────────────────────────────────── */
+
 header {
     background: rgba(15, 20, 25, 0.8);
     backdrop-filter: blur(10px);
@@ -214,6 +226,8 @@ nav {
 .nav-links a.active::after {
     width: 100%;
 }
+
+/* ── Hero ─────────────────────────────────────────────────────── */
 
 .hero {
     background: linear-gradient(135deg, rgba(10, 15, 39, 0.8) 0%, rgba(22, 33, 62, 0.8) 50%, rgba(15, 20, 25, 0.8) 100%);
@@ -421,6 +435,8 @@ nav {
     opacity: 1;
 }
 
+/* ── Section headings (shared across all sections) ───────────────── */
+
 section {
     padding: 6rem 2rem;
     max-width: 1200px;
@@ -476,6 +492,8 @@ h3 {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
+/* ── About ────────────────────────────────────────────────────── */
 
 #about {
     background: linear-gradient(135deg, rgba(15, 20, 25, 0.6) 0%, rgba(22, 33, 62, 0.4) 100%);
@@ -535,6 +553,8 @@ h3 {
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
 }
+
+/* ── Services ─────────────────────────────────────────────────── */
 
 #services {
     background: transparent;
@@ -606,6 +626,8 @@ h3 {
     z-index: 1;
 }
 
+/* ── Portfolio ────────────────────────────────────────────────── */
+
 #portfolio {
     background: transparent;
 }
@@ -660,6 +682,8 @@ h3 {
     line-height: 1.8;
     font-size: 0.95rem;
 }
+
+/* ── Team ─────────────────────────────────────────────────────── */
 
 #team {
     background: linear-gradient(135deg, rgba(15, 20, 25, 0.6) 0%, rgba(22, 33, 62, 0.4) 100%);
@@ -755,6 +779,8 @@ h3 {
     position: relative;
     z-index: 1;
 }
+
+/* ── Contact ──────────────────────────────────────────────────── */
 
 #contact {
     background: linear-gradient(135deg, rgba(15, 20, 25, 0.8) 0%, rgba(22, 33, 62, 0.6) 100%);
@@ -902,6 +928,8 @@ h3 {
     box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
 }
 
+/* ── Footer ───────────────────────────────────────────────────── */
+
 footer {
     background: linear-gradient(135deg, #0a0e27 0%, #16213e 100%);
     color: var(--text-light);
@@ -925,6 +953,8 @@ footer p {
     font-style: italic;
     letter-spacing: 0.3px;
 }
+
+/* ── Back to top ──────────────────────────────────────────────── */
 
 .back-to-top {
     position: fixed;
@@ -961,6 +991,8 @@ footer p {
     box-shadow: 0 0 25px rgba(0, 217, 255, 0.5);
     transform: translateY(-3px);
 }
+
+/* ── Responsive ───────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
     .nav-links {

@@ -1,10 +1,28 @@
+/**
+ * VLORION — Marketing Site
+ * ------------------------------------------------------------------
+ * A young team reimagining software with AI. This file renders the
+ * single-page marketing site: i18n (8 locales), scroll-reveal,
+ * active-nav tracking, and a lightweight canvas particle network.
+ *
+ * Structure:
+ *   1. translations   — i18n dictionary, keyed by data-i18n attrs
+ *   2. setLanguage()   — swaps textContent for all [data-i18n] nodes
+ *   3. useEffect()     — reveal / nav-highlight / back-to-top / canvas
+ *   4. JSX             — header, hero, about, services, portfolio,
+ *                         team, contact, footer
+ * ------------------------------------------------------------------
+ */
+
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './globals.css';
 
 export default function Page() {
-    // 多國語言語系設定檔（已全面剔除未使用的專案一二三文字）
+    const [emailCopied, setEmailCopied] = useState(false);
+
+    // 多國語言語系設定檔
     const translations: Record<string, Record<string, string>> = {
         'zh-TW': {
             nav_about: '關於我們',
@@ -16,6 +34,7 @@ export default function Page() {
             hero_subtitle: '一個年輕團隊，正在用 AI 重新定義軟體開發',
             hero_tagline: '想法。實現。就這麼簡單。',
             hero_cta: '請繼續閱讀',
+            about_eyebrow: '// 關於',
             about_title: '關於 VLORION',
             about_vision: '我們的願景',
             about_text1: '我們不是傳統的科技公司。VLORION 是一群相信軟體可以更聰明、更直覺的人，把人工智慧真正帶進日常的產品裡。',
@@ -30,6 +49,7 @@ export default function Page() {
             value3_desc: '追求代碼質量',
             value4_title: '協作',
             value4_desc: '建立長期合作關係',
+            services_eyebrow: '// 服務',
             services_title: '我們的服務',
             services_subtitle: '提供全方位的人工智慧和軟體開發解決方案',
             service1_title: 'AI 模型開發',
@@ -44,16 +64,21 @@ export default function Page() {
             service5_desc: 'AWS、Google Cloud、Azure等主流雲平台的架構設計與部署。',
             service6_title: '數據分析',
             service6_desc: '大數據處理、數據可視化、商業智能解決方案。',
+            works_eyebrow: '// 作品',
             works_title: '我們的作品',
             works_subtitle: '這裡空空，去其他地方逛逛吧',
+            team_eyebrow: '// 團隊',
             team_title: '我們的團隊',
             team_subtitle: '小而精悍，充滿好奇心的開發者',
             team_member1: 'Champ',
             team_role1: '創辦人 & 開發者',
-            team_desc1: '一個人扛起 AI 研究、全端開發、數據科學與雲端架構——不是因為經驗有多深，而是 because 熱愛把想法做出來。',
+            team_desc1: '一個人扛起 AI 研究、全端開發、數據科學與雲端架構——不是因為經驗有多深，而是因為熱愛把想法做出來。',
+            contact_eyebrow: '// 聯繫',
             contact_title: '聯繫我們',
             contact_subtitle: '讓我們一起打造下一代技術解決方案',
             contact_email: '電郵',
+            copy_label: '複製',
+            copied_label: '已複製',
             contact_phone: '電話',
             contact_address: '地址',
             contact_address_value: '台灣，台中市',
@@ -70,6 +95,7 @@ export default function Page() {
             hero_subtitle: '若いチームが、AIでソフトウェア開発を再定義する',
             hero_tagline: 'アイデアを、かたちに。それだけ。',
             hero_cta: '続きを読む',
+            about_eyebrow: '// について',
             about_title: 'VLORION について',
             about_vision: 'ビジョン',
             about_text1: '私たちは従来のテック企業ではありません。VLORIONは、ソフトウェアはもっと賢く、もっと直感的であるべきだと信じる仲間たちが、AIを日常のプロダクトに届けるチームです。',
@@ -84,6 +110,7 @@ export default function Page() {
             value3_desc: 'コード品質を追求',
             value4_title: '協働',
             value4_desc: '長期的なパートナーシップを構築',
+            services_eyebrow: '// サービス',
             services_title: 'サービス',
             services_subtitle: '包括的なAIとソフトウェア開発ソリューション',
             service1_title: 'AIモデル開発',
@@ -98,16 +125,21 @@ export default function Page() {
             service5_desc: 'AWS、Google Cloud、Azureなどの主流クラウドプラットフォームのアーキテクチャ設計と展開。',
             service6_title: 'データ分析',
             service6_desc: 'ビッグデータ処理、データ可視化、ビジネスインテリジェンスソリューション。',
+            works_eyebrow: '// 実績',
             works_title: '実績',
             works_subtitle: 'ここはまだ空っぽです。他のページも見てみてください',
+            team_eyebrow: '// チーム',
             team_title: 'チーム',
             team_subtitle: '小さくても本気、好奇心が原動力',
             team_member1: 'Champ',
             team_role1: '創業者 & 開発者',
             team_desc1: 'AI研究、フルスタック開発、データサイエンス、クラウド構築をひとりで担う。経験の長さではなく、アイデアを形にする情熱で動いています。',
+            contact_eyebrow: '// 連絡先',
             contact_title: '連絡する',
             contact_subtitle: '次世代のテクノロジーソリューションを一緒に構築しましょう',
             contact_email: 'メール',
+            copy_label: 'コピー',
+            copied_label: 'コピーしました',
             contact_phone: '電話',
             contact_address: 'アドレス',
             contact_address_value: '台湾、台中市',
@@ -124,6 +156,7 @@ export default function Page() {
             hero_subtitle: 'A young team reimagining software with AI',
             hero_tagline: 'Ideas. Made real. That simple.',
             hero_cta: 'Keep Reading',
+            about_eyebrow: '// ABOUT',
             about_title: 'About VLORION',
             about_vision: 'Our Vision',
             about_text1: 'We are not a typical tech company. VLORION is a small group who believe software should be smarter and more intuitive — and who bring AI into everyday products.',
@@ -138,6 +171,7 @@ export default function Page() {
             value3_desc: 'Pursuing code quality',
             value4_title: 'Collaboration',
             value4_desc: 'Building long-term partnerships',
+            services_eyebrow: '// SERVICES',
             services_title: 'Our Services',
             services_subtitle: 'Comprehensive AI and software development solutions',
             service1_title: 'AI Model Development',
@@ -152,16 +186,21 @@ export default function Page() {
             service5_desc: 'Architecture design and deployment on mainstream cloud platforms like AWS, Google Cloud, and Azure.',
             service6_title: 'Data Analytics',
             service6_desc: 'Big data processing, data visualization, and business intelligence solutions.',
+            works_eyebrow: '// WORK',
             works_title: 'Our Work',
             works_subtitle: 'Nothing here yet — go explore the rest of the site',
+            team_eyebrow: '// TEAM',
             team_title: 'Our Team',
             team_subtitle: 'Small, sharp, and endlessly curious',
             team_member1: 'Champ',
             team_role1: 'Founder & Builder',
             team_desc1: 'Carries AI research, full-stack development, data science, and cloud infrastructure solo — not because of years on the job, but because of the drive to bring ideas to life.',
+            contact_eyebrow: '// CONTACT',
             contact_title: 'Contact Us',
             contact_subtitle: 'Let\'s build next-generation technology solutions together',
             contact_email: 'Email',
+            copy_label: 'Copy',
+            copied_label: 'Copied',
             contact_phone: 'Phone',
             contact_address: 'Address',
             contact_address_value: 'Taiwan, Taichung City',
@@ -178,6 +217,7 @@ export default function Page() {
             hero_subtitle: '젊은 팀이 AI로 소프트웨어 개발을 다시 씁니다',
             hero_tagline: '아이디어를, 현실로. 그게 전부입니다.',
             hero_cta: '계속 읽어보기',
+            about_eyebrow: '// 소개',
             about_title: 'VLORION 소개',
             about_vision: '우리의 비전',
             about_text1: '우리는 평범한 테크 기업이 아닙니다. VLORION은 소프트웨어가 더 똑똑하고 더 직관적이어야 한다고 믿는 사람들이, AI를 일상의 제품 속으로 가져오는 팀입니다.',
@@ -192,6 +232,7 @@ export default function Page() {
             value3_desc: '코드 품질을 추구',
             value4_title: '협업',
             value4_desc: '장기적인 파트너십 구축',
+            services_eyebrow: '// 서비스',
             services_title: '우리의 서비스',
             services_subtitle: '포괄적인 AI 및 소프트웨어 개발 솔루션',
             service1_title: 'AI 모델 개발',
@@ -206,16 +247,21 @@ export default function Page() {
             service5_desc: 'AWS, Google Cloud, Azure 등의 주요 클라우드 플랫폼의 아키텍처 설계 및 배포입니다.',
             service6_title: '데이터 분석',
             service6_desc: '빅데이터 처리, 데이터 시각화, 비즈니스 인텔리전스 솔루션입니다.',
+            works_eyebrow: '// 작업물',
             works_title: '우리의 작업물',
             works_subtitle: '아직 여긴 비어 있어요, 다른 곳도 둘러봐 주세요',
+            team_eyebrow: '// 팀',
             team_title: '우리의 팀',
             team_subtitle: '작지만 단단하고, 호기심으로 움직이는 팀',
             team_member1: 'Champ',
             team_role1: '창업자 & 빌더',
             team_desc1: 'AI 연구, 풀스택 개발, 데이터 과학, 클라우드 인프라까지 홀로 책임집니다. 오랜 경력보다, 아이디어를 현실로 만드는 열정으로 움직입니다.',
+            contact_eyebrow: '// 연락처',
             contact_title: '문의하기',
             contact_subtitle: '함께 차세대 기술 솔루션을 구축하세요',
             contact_email: '이메일',
+            copy_label: '복사',
+            copied_label: '복사됨',
             contact_phone: '전화',
             contact_address: '주소',
             contact_address_value: '대만, 타이중시',
@@ -232,6 +278,7 @@ export default function Page() {
             hero_subtitle: 'Ein junges Team, das Softwareentwicklung mit KI neu denkt',
             hero_tagline: 'Ideen. Real gemacht. Mehr braucht es nicht.',
             hero_cta: 'Weiterlesen',
+            about_eyebrow: '// ÜBER UNS',
             about_title: 'Über VLORION',
             about_vision: 'Unsere Vision',
             about_text1: 'Wir sind kein typisches Tech-Unternehmen. VLORION ist eine kleine Gruppe, die glaubt, dass Software smarter und intuitiver sein sollte — und die KI in alltägliche Produkte bringt.',
@@ -245,7 +292,8 @@ export default function Page() {
             value3_title: 'Exzellenz',
             value3_desc: 'Streben nach Code-Qualität',
             value4_title: 'Zusammenarbeit',
-            value4_desc: 'Aufbau langfristiger Partnerships',
+            value4_desc: 'Aufbau langfristiger Partnerschaften',
+            services_eyebrow: '// SERVICES',
             services_title: 'Unsere Dienstleistungen',
             services_subtitle: 'Umfassende KI- und Softwareentwicklungslösungen',
             service1_title: 'KI-Modellentwicklung',
@@ -260,16 +308,21 @@ export default function Page() {
             service5_desc: 'Architekturdesign und Bereitstellung auf Cloud-Plattformen wie AWS, Google Cloud und Azure.',
             service6_title: 'Datenanalyse',
             service6_desc: 'Big-Data-Verarbeitung, Datenvisualisierung und Business-Intelligence-Lösungen.',
+            works_eyebrow: '// ARBEITEN',
             works_title: 'Unsere Arbeiten',
             works_subtitle: 'Hier ist noch nichts – schauen Sie sich gerne woanders um',
+            team_eyebrow: '// TEAM',
             team_title: 'Unser Team',
             team_subtitle: 'Klein, scharfsinnig, unermüdlich neugierig',
             team_member1: 'Champ',
             team_role1: 'Gründer & Macher',
             team_desc1: 'Trägt KI-Forschung, Full-Stack-Entwicklung, Data Science und Cloud-Infrastruktur allein — nicht wegen jahrelanger Erfahrung, sondern aus dem Antrieb, Ideen Wirklichkeit werden zu lassen.',
+            contact_eyebrow: '// KONTAKT',
             contact_title: 'Kontaktieren Sie uns',
             contact_subtitle: 'Lassen Sie uns gemeinsam Lösungen der nächsten Generation aufbauen',
             contact_email: 'E-Mail',
+            copy_label: 'Kopieren',
+            copied_label: 'Kopiert',
             contact_phone: 'Telefon',
             contact_address: 'Adresse',
             contact_address_value: 'Taiwan, Taichung',
@@ -286,6 +339,7 @@ export default function Page() {
             hero_subtitle: 'Молодая команда, переосмысляющая разработку ПО с помощью ИИ',
             hero_tagline: 'Идеи. Воплощённые в реальность. Просто так.',
             hero_cta: 'Читать дальше',
+            about_eyebrow: '// О НАС',
             about_title: 'О компании VLORION',
             about_vision: 'Наше видение',
             about_text1: 'Мы не типичная технологическая компания. VLORION — небольшая группа людей, которые верят, что программное обеспечение должно быть умнее и интуитивнее, и которые внедряют ИИ в повседневные продукты.',
@@ -300,6 +354,7 @@ export default function Page() {
             value3_desc: 'Стремление к качеству кода',
             value4_title: 'Сотрудничество',
             value4_desc: 'Построение долгосрочных партнёрств',
+            services_eyebrow: '// УСЛУГИ',
             services_title: 'Наши услуги',
             services_subtitle: 'Комплексные решения в области ИИ и разработки программного обеспечения',
             service1_title: 'Разработка моделей ИИ',
@@ -314,16 +369,21 @@ export default function Page() {
             service5_desc: 'Проектирование архитектуры и развёртывание на облачных платформах, таких как AWS, Google Cloud и Azure.',
             service6_title: 'Анализ данных',
             service6_desc: 'Обработка больших данных, визуализация данных и решения бизнес-аналитики.',
+            works_eyebrow: '// РАБОТЫ',
             works_title: 'Наши работы',
             works_subtitle: 'Здесь пока пусто — загляните в другие разделы',
+            team_eyebrow: '// КОМАНДА',
             team_title: 'Наша команда',
             team_subtitle: 'Небольшая, целеустремленная и вечно любопытная',
             team_member1: 'Champ',
             team_role1: 'Основатель & разработчик',
             team_desc1: 'В одиночку отвечает за исследования ИИ, полнотекстовую разработку, науку о данных и облачную инфраструктуру — не благодаря годам опыта, а благодаря желанию воплощать идеи в жизнь.',
+            contact_eyebrow: '// КОНТАКТЫ',
             contact_title: 'Свяжитесь с нами',
             contact_subtitle: 'Давайте вместе создадим решения следующего поколения',
             contact_email: 'Электронная почта',
+            copy_label: 'Копировать',
+            copied_label: 'Скопировано',
             contact_phone: 'Телефон',
             contact_address: 'Адрес',
             contact_address_value: 'Тайвань, Тайчжун',
@@ -340,6 +400,7 @@ export default function Page() {
             hero_subtitle: 'Un equipo joven reinventando el desarrollo de software con IA',
             hero_tagline: 'Ideas. Hechas realidad. Así de simple.',
             hero_cta: 'Seguir leyendo',
+            about_eyebrow: '// NOSOTROS',
             about_title: 'Acerca de VLORION',
             about_vision: 'Nuestra Visión',
             about_text1: 'No somos una empresa tecnológica típica. VLORION es un pequeño grupo que cree que el software debería ser más inteligente e intuitivo, y que lleva la IA a productos cotidianos.',
@@ -354,6 +415,7 @@ export default function Page() {
             value3_desc: 'Búsqueda de la calidad del código',
             value4_title: 'Colaboración',
             value4_desc: 'Construcción de relaciones a largo plazo',
+            services_eyebrow: '// SERVICIOS',
             services_title: 'Nuestros Servicios',
             services_subtitle: 'Soluciones integrales de IA y desarrollo de software',
             service1_title: 'Desarrollo de Modelos de IA',
@@ -368,16 +430,21 @@ export default function Page() {
             service5_desc: 'Diseño de arquitectura e implementación en plataformas en la nube como AWS, Google Cloud y Azure.',
             service6_title: 'Análisis de Datos',
             service6_desc: 'Procesamiento de big data, visualización de datos y soluciones de inteligencia empresarial.',
+            works_eyebrow: '// TRABAJOS',
             works_title: 'Nuestros Trabajos',
             works_subtitle: 'Aquí no hay nada todavía, échale un vistazo al resto del sitio',
+            team_eyebrow: '// EQUIPO',
             team_title: 'Nuestro Equipo',
             team_subtitle: 'Pequeño, ágil, y sin límite de curiosidad',
             team_member1: 'Champ',
             team_role1: 'Fundador & Constructor',
             team_desc1: 'Lleva en solitario la investigación de IA, el desarrollo full-stack, la ciencia de datos y la infraestructura en la nube, no por años de experiencia, sino por las ganas de convertir ideas en realidad.',
+            contact_eyebrow: '// CONTACTO',
             contact_title: 'Contáctenos',
             contact_subtitle: 'Construyamos juntos soluciones de próxima generación',
             contact_email: 'Correo electrónico',
+            copy_label: 'Copiar',
+            copied_label: 'Copiado',
             contact_phone: 'Teléfono',
             contact_address: 'Dirección',
             contact_address_value: 'Taiwán, Taichung',
@@ -392,8 +459,9 @@ export default function Page() {
             nav_contact: 'Contato',
             hero_title: 'VLORION',
             hero_subtitle: 'Uma equipe jovem reinventando o desenvolvimento de software com IA',
-            hero_tagline: 'Ideas. Feitas realidade. É simples assim.',
+            hero_tagline: 'Ideias. Feitas realidade. É simples assim.',
             hero_cta: 'Continue lendo',
+            about_eyebrow: '// SOBRE',
             about_title: 'Sobre VLORION',
             about_vision: 'Nossa Visão',
             about_text1: 'Não somos uma empresa de tecnologia típica. A VLORION é um pequeno grupo que acredita que o software deveria ser mais inteligente e intuitivo, trazendo IA para produtos do dia a dia.',
@@ -408,6 +476,7 @@ export default function Page() {
             value3_desc: 'Busca pela qualidade do código',
             value4_title: 'Colaboração',
             value4_desc: 'Construção de parcerias de longo prazo',
+            services_eyebrow: '// SERVIÇOS',
             services_title: 'Nossos Serviços',
             services_subtitle: 'Soluções abrangentes de IA e desenvolvimento de software',
             service1_title: 'Desenvolvimento de Modelos de IA',
@@ -420,18 +489,23 @@ export default function Page() {
             service4_desc: 'Desenvolvimento full-stack para aplicações web, móveis e de desktop com pilhas tecnológicas mais recentes.',
             service5_title: 'Soluções em Nuvem',
             service5_desc: 'Design de arquitetura e implantação em plataformas em nuvem como AWS, Google Cloud e Azure.',
-            service6_title: 'Análise de Datos',
+            service6_title: 'Análise de Dados',
             service6_desc: 'Processamento de big data, visualização de dados e soluções de inteligência empresarial.',
+            works_eyebrow: '// TRABALHOS',
             works_title: 'Nossos Trabalhos',
             works_subtitle: 'Ainda não há nada aqui, dá uma olhada no resto do site',
+            team_eyebrow: '// EQUIPE',
             team_title: 'Nossa Equipe',
             team_subtitle: 'Pequena, afiada e movida por curiosidade',
             team_member1: 'Champ',
             team_role1: 'Fundador & Criador',
             team_desc1: 'Assume sozinho a pesquisa de IA, desenvolvimento full-stack, ciência de dados e infraestrutura em nuvem — não por anos de experiência, mas pela vontade de transformar ideias em realidade.',
+            contact_eyebrow: '// CONTATO',
             contact_title: 'Contate-nos',
-            contact_subtitle: 'Vamos construir soluções de próxima generation juntos',
+            contact_subtitle: 'Vamos construir soluções de próxima geração juntos',
             contact_email: 'E-mail',
+            copy_label: 'Copiar',
+            copied_label: 'Copiado',
             contact_phone: 'Telefone',
             contact_address: 'Endereço',
             contact_address_value: 'Taiwan, Taichung',
@@ -463,8 +537,32 @@ export default function Page() {
     }
 
     useEffect(() => {
-        setLanguage('zh-TW');
+        // Anyone popping the console open gets a small hello.
+        console.log(
+            '%c VLORION %c\n%ccontact@vlorion.com',
+            'background:#00d9ff;color:#0f1419;font-weight:900;font-size:20px;padding:6px 16px;border-radius:4px;letter-spacing:2px;',
+            '',
+            'color:#94a3b8;font-family:monospace;font-size:12px;line-height:1.8;'
+        );
 
+        // --- Auto-detect the visitor's browser language and pick the closest supported locale ---
+        const supportedLangs = Object.keys(translations);
+        const browserLangs = navigator.languages && navigator.languages.length
+            ? navigator.languages
+            : [navigator.language];
+
+        let initialLang = 'zh-TW';
+        for (const bl of browserLangs) {
+            const lower = bl.toLowerCase();
+            const exact = supportedLangs.find(l => l.toLowerCase() === lower);
+            if (exact) { initialLang = exact; break; }
+            const base = lower.split('-')[0];
+            const partial = supportedLangs.find(l => l.toLowerCase().split('-')[0] === base);
+            if (partial) { initialLang = partial; break; }
+        }
+        setLanguage(initialLang);
+
+        // --- Scroll-reveal: fade+lift sections into view as the user scrolls ---
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (!prefersReducedMotion && 'IntersectionObserver' in window) {
             const revealObserver = new IntersectionObserver((entries) => {
@@ -480,6 +578,7 @@ export default function Page() {
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
         }
 
+        // --- Back-to-top: reveal the button once the user has scrolled past the hero ---
         const backToTop = document.getElementById('backToTop');
         const handleScroll = () => {
             if (backToTop) {
@@ -492,6 +591,7 @@ export default function Page() {
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
 
+        // --- Active nav link: highlight whichever section is currently in view ---
         const navLinks = document.querySelectorAll('.nav-links a');
         const navSections = Array.from(navLinks)
             .map(link => {
@@ -514,6 +614,7 @@ export default function Page() {
             navSections.forEach(section => navObserver.observe(section));
         }
 
+        // --- Hero background: a lightweight particle network on <canvas>, no dependencies ---
         const canvas = document.getElementById('neuralCanvas') as HTMLCanvasElement | null;
         if (canvas) {
             const ctx = canvas.getContext('2d');
@@ -592,8 +693,16 @@ export default function Page() {
         };
     }, []);
 
+    const handleCopyEmail = () => {
+        navigator.clipboard.writeText('contact@vlorion.com').then(() => {
+            setEmailCopied(true);
+            setTimeout(() => setEmailCopied(false), 2000);
+        });
+    };
+
     return (
         <>
+            {/* ── Header / Nav ─────────────────────────────────────── */}
             <header>
                 <nav>
                     <div className="nav-top">
@@ -619,6 +728,7 @@ export default function Page() {
                 </nav>
             </header>
 
+            {/* ── Hero ─────────────────────────────────────────────── */}
             <section className="hero">
                 <canvas id="neuralCanvas"></canvas>
                 <div className="hero-content">
@@ -629,7 +739,9 @@ export default function Page() {
                 </div>
             </section>
 
+            {/* ── About ────────────────────────────────────────────── */}
             <section id="about">
+                <span className="eyebrow" data-i18n="about_eyebrow">// 關於</span>
                 <h2 data-i18n="about_title">關於 VLORION</h2>
                 <div className="about-content">
                     <div className="about-text reveal">
@@ -650,7 +762,9 @@ export default function Page() {
                 </div>
             </section>
 
+            {/* ── Services ─────────────────────────────────────────── */}
             <section id="services">
+                <span className="eyebrow" data-i18n="services_eyebrow">// 服務</span>
                 <h2 data-i18n="services_title">我們的服務</h2>
                 <p className="section-subtitle" data-i18n="services_subtitle"></p>
                 <div className="services-grid">
@@ -663,13 +777,16 @@ export default function Page() {
                 </div>
             </section>
 
-            {/* 🚀 完美修正：作品區塊高冷獨立，只會留下指定警語，毫無專案格子卡片 */}
+            {/* ── Portfolio (empty state for now) ─────────────────── */}
             <section id="portfolio">
+                <span className="eyebrow" data-i18n="works_eyebrow">// 作品</span>
                 <h2 data-i18n="works_title">我們的作品</h2>
                 <p className="section-subtitle reveal" data-i18n="works_subtitle"></p>
             </section>
 
+            {/* ── Team ─────────────────────────────────────────────── */}
             <section id="team">
+                <span className="eyebrow" data-i18n="team_eyebrow">// 團隊</span>
                 <h2 data-i18n="team_title">我們的團隊</h2>
                 <p className="section-subtitle" data-i18n="team_subtitle"></p>
                 <div className="team-grid">
@@ -681,19 +798,41 @@ export default function Page() {
                 </div>
             </section>
 
+            {/* ── Contact ──────────────────────────────────────────── */}
             <section id="contact">
+                <span className="eyebrow" data-i18n="contact_eyebrow">// 聯繫</span>
                 <h2 data-i18n="contact_title">聯繫我們</h2>
                 <p className="section-subtitle" data-i18n="contact_subtitle"></p>
                 <div className="contact-info">
                     <div className="contact-item reveal">
                         <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}></div>
                         <h3 style={{ color: 'white', fontSize: '1rem', marginBottom: '0.5rem' }} data-i18n="contact_email"></h3>
-                        <p><a href="mailto:contact@vlorion.com" style={{ color: 'var(--primary-color)', textDecoration: 'none' }}>contact@vlorion.com</a></p>
+                        <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+                            <a href="mailto:contact@vlorion.com" style={{ color: 'var(--primary-color)', textDecoration: 'none' }}>contact@vlorion.com</a>
+                            <button
+                                type="button"
+                                onClick={handleCopyEmail}
+                                style={{
+                                    background: 'none',
+                                    border: '1px solid rgba(0, 217, 255, 0.4)',
+                                    borderRadius: '4px',
+                                    color: 'var(--primary-color)',
+                                    fontSize: '0.7rem',
+                                    padding: '0.2rem 0.5rem',
+                                    cursor: 'pointer',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.5px'
+                                }}
+                            >
+                                <span data-i18n="copy_label" style={{ display: emailCopied ? 'none' : 'inline' }}>複製</span>
+                                <span data-i18n="copied_label" style={{ display: emailCopied ? 'inline' : 'none' }}>已複製</span>
+                            </button>
+                        </p>
                     </div>
                     <div className="contact-item reveal">
                         <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}></div>
                         <h3 style={{ color: 'white', fontSize: '1rem', marginBottom: '0.5rem' }} data-i18n="contact_phone"></h3>
-                        <p><a href="javascript:void(0)" style={{ color: 'var(--primary-color)', textDecoration: 'none' }}>尚未註冊</a></p>
+                        <p style={{ color: 'var(--primary-color)' }}>尚未註冊</p>
                     </div>
                     <div className="contact-item reveal">
                         <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}></div>
@@ -707,6 +846,7 @@ export default function Page() {
                 </div>
             </section>
 
+            {/* ── Footer + back-to-top ─────────────────────────────── */}
             <footer>
                 <p data-i18n="footer"></p>
                 <p className="footer-ps" data-i18n="footer_ps"></p>
