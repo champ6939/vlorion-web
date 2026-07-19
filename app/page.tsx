@@ -872,7 +872,7 @@ export default function Page() {
                 <div className="contact-links">
                     <a href="https://www.instagram.com/vlorionofficial" target="_blank" rel="noreferrer">Instagram</a>
                     <a href="https://x.com/vlorionofficial" target="_blank" rel="noreferrer">X (Twitter)</a>
-                    <a href="https://youtube.com/vlorion" target="_blank" rel="noreferrer">YouTube</a>
+                    <a href="https://www.youtube.com/@vlorion" target="_blank" rel="noreferrer">YouTube</a>
                 </div>
             </section>
 
