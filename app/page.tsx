@@ -873,6 +873,7 @@ export default function Page() {
                     <a href="https://www.instagram.com/vlorionofficial" target="_blank" rel="noreferrer">Instagram</a>
                     <a href="https://x.com/vlorionofficial" target="_blank" rel="noreferrer">X (Twitter)</a>
                     <a href="https://www.youtube.com/@vlorion" target="_blank" rel="noreferrer">YouTube</a>
+                    <a href="https://developers.vlorion.com" target="_blank" rel="noreferrer">Developer Portal</a>
                 </div>
             </section>
 
